@@ -1,7 +1,5 @@
+/*Header Section*/
 
-
-/*search page*/
-/* Header Section */
 @keyframes typing{
     from{width:0;}
     to{width:15vw;}
@@ -13,16 +11,13 @@
 }
 header h1{
     overflow:hidden;
-    width:15vw;
+    width:18vw;
     border-right: 2px solid #1c9e62;
     white-space: nowrap;
     letter-spacing: 2px;
     animation: typing 2s steps(40,end), blink-caret .75s infinite;
 }
-header{
-    /* height: 115vh; */
-    width: 100vw;
-}
+
 a{
     text-decoration: none;
     color:#7F8487;
@@ -38,15 +33,18 @@ a{
     justify-content: center;
 }
 .myimg img{
-    width:80%;
+    width:20%;
+    height: 20%;
     filter: grayscale(100%) contrast(154%);
+    border-radius: 20%;
+
 }
 
 #headertxt{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
 /*Adding number and mail*/
@@ -76,7 +74,7 @@ a{
     border-left: solid 0.2rem #1c9e62;
     margin-right: 0.2rem;
 }
-  /*Underline for headings*/
+/*Underline for headings*/
 .underline-border{
     width: 0.2rem;
     height: 2.5rem;
@@ -85,54 +83,55 @@ a{
 }
 .headings{
     text-align: center;
- }
+}
  /* About me section */
- section{
+section{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap:20vh;
- }
- #about{
+}
+#about{
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
- }
- article{
+
+}
+article{
     background-color:#242424;
     padding: 20px;
- }
- article h3{
+}
+article h3{
     color: #1c9e62;
     font-size: large;
- }
- article:hover{
+}
+article:hover{
     border-left:solid #1c9e62;
- }
+}
 
 /*Resume table*/
 table{
     border-spacing: 1vw;
- }
+}
 th{
     padding: 2%;
     font-size: 1.2rem;
     width:24vw;
- }
+}
 td{
     height: 21vh;
     width: 20vw;
     background-color:#242424;
     font-size: 1rem;
     padding-left: 1vw;
-  }
+}
 span{
     font-size: 0.9rem;
     color: #1c9e62;
 }
-  /*footer*/
+/*footer*/
 footer{
     display: flex;
     flex-direction: column;
@@ -152,7 +151,7 @@ details > summary {
 }
 ul{
     list-style: none;
-  }
+}
 li a{
     color: #fff;
     transition: 0.7s;
@@ -252,4 +251,10 @@ footer p {
     footer{
         transform: scale(0.8);
     }
+}
+
+#Bio{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

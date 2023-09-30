@@ -113,11 +113,7 @@ function updateSorting(timeframe) {
 createPaginationButtons(5);
 loadMovies(pageNumber, currentSorting);
 
-document.getElementById("weekButton").addEventListener("click", () => {
-    updateSorting("week");
-});
 
-document.getElementById("dayButton").addEventListener("click", () => {
-    updateSorting("day");
-});
+
+
 
