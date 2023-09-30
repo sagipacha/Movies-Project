@@ -1,0 +1,255 @@
+
+
+/*search page*/
+/* Header Section */
+@keyframes typing{
+    from{width:0;}
+    to{width:15vw;}
+}
+@keyframes blink-caret{
+    from{border-color: transparent;}
+    50%{border-color: #1c9e62;}
+    to {border-color: transparent;}
+}
+header h1{
+    overflow:hidden;
+    width:15vw;
+    border-right: 2px solid #1c9e62;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    animation: typing 2s steps(40,end), blink-caret .75s infinite;
+}
+header{
+    /* height: 115vh; */
+    width: 100vw;
+}
+a{
+    text-decoration: none;
+    color:#7F8487;
+}
+.header-section{
+    margin-top:10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.myimg{
+    display: flex;
+    justify-content: center;
+}
+.myimg img{
+    width:80%;
+    filter: grayscale(100%) contrast(154%);
+}
+
+#headertxt{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Adding number and mail*/
+.cards{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    display: flex;
+
+}
+.card{
+    background-color:#242424;
+    padding:1%;
+    width:250px;
+    text-align: center;
+    text-indent: 0.3rem;
+    margin: 2vh;
+    display: flex;
+    height: 100px;
+    
+
+}
+.card p{
+    color:#7F8487;
+}
+.card:hover, td:hover{
+    border-left: solid 0.2rem #1c9e62;
+    margin-right: 0.2rem;
+}
+  /*Underline for headings*/
+.underline-border{
+    width: 0.2rem;
+    height: 2.5rem;
+    background-color: #1c9e62;
+    margin: 5px auto 10px auto;
+}
+.headings{
+    text-align: center;
+ }
+ /* About me section */
+ section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:20vh;
+ }
+ #about{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+ }
+ article{
+    background-color:#242424;
+    padding: 20px;
+ }
+ article h3{
+    color: #1c9e62;
+    font-size: large;
+ }
+ article:hover{
+    border-left:solid #1c9e62;
+ }
+
+/*Resume table*/
+table{
+    border-spacing: 1vw;
+ }
+th{
+    padding: 2%;
+    font-size: 1.2rem;
+    width:24vw;
+ }
+td{
+    height: 21vh;
+    width: 20vw;
+    background-color:#242424;
+    font-size: 1rem;
+    padding-left: 1vw;
+  }
+span{
+    font-size: 0.9rem;
+    color: #1c9e62;
+}
+  /*footer*/
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+}
+details{
+    padding-top: 3vh;
+    margin: auto;
+    transition: 1s;
+}
+details:hover{
+    color: #1c9e62;
+}
+details > summary {
+    list-style-type: none;  
+    cursor: pointer;
+}
+ul{
+    list-style: none;
+  }
+li a{
+    color: #fff;
+    transition: 0.7s;
+} 
+li a:hover{
+    color: #1c9e62;
+}
+details li::before {
+    content: "• ";
+    color: #1c9e62;
+}
+.icons{
+    padding: 3%;
+    text-align: center;
+}
+.icons a{
+    padding: 1%;
+    text-align: center;
+    transition: 0.7s;
+}
+.icons a:hover{
+    color: #1c9e62;
+}
+footer p {
+    word-spacing: 0.5rem;
+    text-align: center;
+    font-size: smaller;
+    color:#7F8487;
+}
+@keyframes pulse{
+    0%{
+        transform: scale(0.7);
+        box-shadow: 0 0 0 0 rgba(28, 145, 90, 0.7)
+    }
+    70%{
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(28, 145, 90, 0)
+    }
+    100%{
+        transform: scale(0.7);
+        box-shadow: 0 0 0 0 rgba(28, 145, 90, 0.7)
+    }
+}
+.dot{
+    background-color: rgb(28, 158, 98);
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    animation: pulse 2s infinite;
+}
+.heading-with-dot{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap:2px;
+}
+@media screen and (max-width:600px){
+    header{
+        height:fit-content;
+    }
+    .header-section{
+        margin: 0;
+        flex-direction: column;
+    }
+    #headertxt{
+        transform: scale(0.75);
+        justify-content: start;
+        margin-left:-2vw;
+    }
+    .myimg{
+        transform: scale(0.7);
+        margin-top: -10vh;
+    }
+    .navbar ul{
+        transform: scale(0.8);
+        gap: 6vw;
+    }
+    nav{
+    transform: translateX(1vw);
+    }
+    article{
+        transform: scale(0.8);
+    }
+    table{
+        width: 92vw;
+    }
+    th{
+        font-size: 0.8rem;
+    }
+    td{
+        font-size: 0.8rem;
+    }
+    span{
+        font-size: 0.7rem;
+    }
+    footer{
+        transform: scale(0.8);
+    }
+}
