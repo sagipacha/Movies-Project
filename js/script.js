@@ -1,3 +1,4 @@
+//navBar//
 const navBar = document.querySelector("#navBar");
 navBar.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-top: 0px;">
 <div class="container-fluid">
@@ -24,42 +25,42 @@ navBar.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary" style=
 </nav>`
 
 
-const container = document.getElementById("twentyContainer");
-const paginationButtons = document.getElementById("paginationButtons");
+// const container = document.getElementById("twentyContainer");
+// const paginationButtons = document.getElementById("paginationButtons");
 
-let pageNumber = 1;
-let currentSorting = "popularity.desc"; 
+// let pageNumber = 1;
+// let currentSorting = "popularity.desc"; 
 
-function loadMovies(page, sorting) {
+// function loadMovies(page, sorting) {
 
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f4d65121a3b367edbdbd6b3a02f2721c&page=${page}&sort_by=${sorting}`)
-        .then(response => response.json())
-        .then(data => {
-            container.innerHTML = "";
-            data.results.forEach(movie => {
-                const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-                container.innerHTML += 
-                `<div class="wrapper">
-        <div class="card">
-		<div class="poster"><img src="${posterUrl}" alt="Location Unknown"></div>
-		<div class="details">
-			<h1>${movie.original_title}</h1>
-			<h2>${movie.release_date}</h2>
-			<div class="tags">
-				<span class="tag">${movie.popularity}</span>
-			</div>
-			<p class="desc">${movie.overview}</p>
-		</div>
-	</div>
-	</div>`
+//     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f4d65121a3b367edbdbd6b3a02f2721c&page=${page}&sort_by=${sorting}`)
+//         .then(response => response.json())
+//         .then(data => {
+//             container.innerHTML = "";
+//             data.results.forEach(movie => {
+//                 const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+//                 container.innerHTML += 
+//                 `<div class="wrapper">
+//         <div class="card">
+// 		<div class="poster"><img src="${posterUrl}" alt="Location Unknown"></div>
+// 		<div class="details">
+// 			<h1>${movie.original_title}</h1>
+// 			<h2>${movie.release_date}</h2>
+// 			<div class="tags">
+// 				<span class="tag">${movie.popularity}</span>
+// 			</div>
+// 			<p class="desc">${movie.overview}</p>
+// 		</div>
+// 	</div>
+// 	</div>`
 
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}
+//             });
+//             window.scrollTo({ top: 0, behavior: 'smooth' });
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         });
+// }
 
 // function createPaginationButtons(totalPages) {
 //     paginationButtons.innerHTML = "";
@@ -92,6 +93,63 @@ function loadMovies(page, sorting) {
 // });
 
 
+// function createPaginationButtons(totalPages) {
+//     paginationButtons.innerHTML = "";
+//     for (let i = 1; i <= totalPages; i++) {
+//         const button = document.createElement("button");
+//         button.textContent = i;
+//         button.addEventListener("click", () => {
+//             pageNumber = i;
+//             loadMovies(pageNumber, currentSorting);
+//         });
+//         paginationButtons.appendChild(button);
+//     }
+// }
+
+// function updateSorting(timeframe) {
+//     currentSorting = `popularity.${timeframe}_desc`;
+//     loadMovies(pageNumber, currentSorting);
+// }
+
+// createPaginationButtons(5);
+// loadMovies(pageNumber, currentSorting);
+
+
+const container = document.getElementById("twentyContainer");
+const paginationButtons = document.getElementById("paginationButtons");
+
+let pageNumber = 1;
+let currentSorting = "popularity.desc";
+
+function loadMovies(page, sorting) {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f4d65121a3b367edbdbd6b3a02f2721c&page=${page}&sort_by=${sorting}`)
+        .then(response => response.json())
+        .then(data => {
+            container.innerHTML = "";
+            data.results.forEach(movie => {
+                const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+                container.innerHTML +=
+                    `<div class="wrapper">
+                        <div class="card">
+                            <div class="poster"><img src="${posterUrl}" alt="Location Unknown"></div>
+                            <div class="details">
+                                <h1>${movie.original_title}</h1>
+                                <h2>${movie.release_date}</h2>
+                                <div class="tags">
+                                    <span class="tag">${movie.popularity}</span>
+                                </div>
+                                <p class="desc">${movie.overview}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
 function createPaginationButtons(totalPages) {
     paginationButtons.innerHTML = "";
     for (let i = 1; i <= totalPages; i++) {
@@ -112,8 +170,3 @@ function updateSorting(timeframe) {
 
 createPaginationButtons(5);
 loadMovies(pageNumber, currentSorting);
-
-
-
-
-
