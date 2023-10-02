@@ -1,0 +1,29 @@
+body {
+    background-color: black;
+}
+
+#headLine {
+    position: sticky;
+    margin-top: 100px;
+    top: 0;
+    z-index: 1;
+}
+
+#movieContainer {
+    position: relative;
+    height: 60%;
+    padding: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#myInput {
+    height: 30px;
+    display: block;
+}
+
+.wrapper {
+    height: 500px;
+}
