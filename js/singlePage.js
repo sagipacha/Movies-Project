@@ -39,7 +39,26 @@ function singularMovieInfo() {
             const imageUrl = (`https://image.tmdb.org/t/p/w500${movieData.poster_path}`)
             const movieCast = movieData.credits.cast;
             const castList = movieCast.map(cast => `<li>${cast.name} as ${cast.character}</li>`).join("");
-            movieInfoContainer.innerHTML = 
+            movieInfoContainer.innerHTML = `<div class="container">
+            <h1 class="movie-title" >${movieData.title}</h1>
+            <img class="movie-poster" src="${imageUrl}" alt="${movieData.title} Poster">
+            <br><br>
+            <p class="overview" style="font-size:17px;font-weight:bold;">${movieData.overview} </p>
+            <p class="release-date">Release Date : ${movieData.release_date}</p>
+            <p class="genres">Genres : ${movieData.genres.map(genre => genre.name).join(", ")}</p>
+            <p class="cast" style="font-size:17px;font-weight:bold;">Cast:</p>
+                ${castList}
+        </div><br><br>`
+
+
+
+
+
+
+
+
+
+
             // `<img src="${imageUrl}">
             // <h1>${movieData.title}</h1>
             // <p>${movieData.overview}</p>
@@ -50,21 +69,21 @@ function singularMovieInfo() {
 
 
 
-                `<div class="wrapper" style="width:400px; height:400px">
-                <div class="card">
-                    <div class="poster"><img src="${imageUrl}" alt="Location Unknown"></div>
-                    <div class="details">
-                        <h1>${movieData.title}</h1>
-                        <p>Release Date: ${movieData.release_date}</p>
-                        <p>Genres: ${movieData.genres.map(genres => genres.name).join(", ")}</p>
-                        <p>${movieData.overview}</p>
-                        <div class="tags">
-                            <span class="tag">${movieData.popularity}</span>
-                        </div>
-                        <ul>${castList}</ul>
-                    </div>
-                </div>
-            </div>`;
+            //     `<div class="wrapper" style="width:400px; height:400px">
+            //     <div class="card">
+            //         <div class="poster"><img src="${imageUrl}" alt="Location Unknown"></div>
+            //         <div class="details">
+            //             <h1>${movieData.title}</h1>
+            //             <p>Release Date: ${movieData.release_date}</p>
+            //             <p>Genres: ${movieData.genres.map(genres => genres.name).join(", ")}</p>
+            //             <p>${movieData.overview}</p>
+            //             <div class="tags">
+            //                 <span class="tag">${movieData.popularity}</span>
+            //             </div>
+            //             <ul>${castList}</ul>
+            //         </div>
+            //     </div>
+            // </div>`;
 
 
         })
