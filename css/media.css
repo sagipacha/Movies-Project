@@ -20,8 +20,22 @@
     #companiesLogos {
         display: flex;
         flex-direction: column; 
-        align-items: center; 
+        align-items: center;
+        text-align: center; 
+    }
+    #navBar {
+        width: 100%; 
+        max-width: 200px; 
+        flex-direction: column; 
+    }
+    h1 {
+        
+        font-size: 36px; 
         text-align: center; 
     }
 }
 
+
+
+
+    
