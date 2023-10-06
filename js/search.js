@@ -38,7 +38,6 @@ function searchMoviesDisplay(pageName) {
                     return `<div class="wrapper">
                     <div class="card">
                         <div class="poster">
-                        <img src="picturs/White-Heart.png" id="heartIcon">
                         <img src="${posterUrl}" alt="Location Unknown">
                         </div>
                         <div class="details">

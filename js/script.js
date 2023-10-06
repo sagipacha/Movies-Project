@@ -24,6 +24,8 @@ navBar.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary" style=
 </div>
 </nav>`
 
+let favourite_movies = JSON.parse(localStorage.getItem('favourite')) || [];
+console.log(JSON.parse(localStorage.getItem('favourite')));
 
 const container = document.getElementById("twentyContainer");
 const paginationButtons = document.getElementById("paginationButtons");
@@ -37,12 +39,13 @@ function loadMovies(page, sorting) {
         .then(data => {
             container.innerHTML = "";
             data.results.forEach(movie => {
+                const isLiked = favourite_movies.includes(movie.id); // Check if the movie ID is liked
+                const likeButtonClass = isLiked ? 'userLiked':'';
                 const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
                 container.innerHTML +=
                     `<div class="wrapper">
                         <div class="card">
                             <div class="poster">
-                            <img src="picturs/White-Heart.png" id="heartIcon" data-favorite="false">
                             <img src="${posterUrl}" alt="Location Unknown">
                             </div>
                             <div class="details">
@@ -54,11 +57,25 @@ function loadMovies(page, sorting) {
                                 <p class="desc">${movie.overview}</p>
                             </div>
                         </div>
+                        <button class='likeBtn ${likeButtonClass}'> <i class="fa fa-thumbs-up" aria-hidden="true"></i>like</button>
                     </div>`;
             });
+            const USER_LIKED = document.querySelectorAll('.likeBtn');
+        USER_LIKED.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+        btn.classList.toggle('userLiked');
+        const movieId = data.results[i].id;
+        const movieIndex = favourite_movies.indexOf(movieId);
+        if (movieIndex === -1) {
+            favourite_movies.push(movieId);
+        } else {
+            favourite_movies.splice(movieIndex, 1);
+        }
+        localStorage.setItem('favourite', JSON.stringify(favourite_movies));
+    });
+});
             window.scrollTo({ top: 0, behavior: 'smooth' });
         })
-        heartIcon.addEventListener('click', saveFavorite)
         .catch(error => {
             console.log(error);
         });
@@ -84,7 +101,6 @@ function updateSorting(timeframe) {
 
 createPaginationButtons(5);
 loadMovies(pageNumber, currentSorting);
-
 
 
 

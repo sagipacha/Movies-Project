@@ -23,77 +23,76 @@ navBar.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary" style=
 </div>
 </nav>`
 
-document.addEventListener("DOMContentLoaded", () => {
-    let likedMoviesArray = JSON.parse(localStorage.getItem("likedMovies")) || [];
-    const likedMoviesList = document.getElementById("likedMoviesList");
-    const resetButton = document.getElementById("resetButton");
 
-    function createMovieCard(movieData) {
-    const movieCard = document.createElement("div");
-    movieCard.className = "movie-card";
-
-    const movieTitle = document.createElement("p");
-    movieTitle.textContent = `Title:${movieData.title}`;
-
-    const moviePoster = document.createElement("img");
-    moviePoster.src = `https://image.tmdb.org/t/p/original${movieData.poster_path}`;
-    moviePoster.style.width = "10%";
-    moviePoster.alt = movieData.title;
-
-    const heartIcon = document.createElement("i");
-    const isLiked = likedMoviesArray.some((movie) => movie.id === movieData.id);
-    heartIcon.className = `heart-icon ${
-        isLiked ? "fa-solid" : "fa-regular"
-    } fa-heart`;
-    heartIcon.style.color = isLiked ? "#ff0000" : "";
-
-    heartIcon.addEventListener("click", () => {
-        const index = likedMoviesArray.findIndex(
-        (movie) => movie.id === movieData.id
-        );
-        if (index !== -1) {
-        likedMoviesArray.splice(index, 1);
-        } else {
-        likedMoviesArray.push(movieData);
-        }
-        updateLocalStorage();
-        displayLikedMovies();
-    });
-
-    movieCard.appendChild(movieTitle);
-    movieCard.appendChild(moviePoster);
-    movieCard.appendChild(heartIcon);
-
-    return movieCard;
+let favourite_movies = JSON.parse(localStorage.getItem('favourite')) || [];
+console.log(JSON.parse(localStorage.getItem('favourite')));
+const FAVORITE_CONTAINER=document.querySelector('#listMovieSearch')
+const OPTIONS = {
+    method: 'GET',
+    headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNGQ2NTEyMWEzYjM2N2VkYmRiZDZiM2EwMmYyNzIxYyIsInN1YiI6IjY1MTZiMmI5ZWE4NGM3MDBjYTA2Y2M2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mKnxwB8LtvWEcTPzL7c5ldXkxH6mcwqNqktS3Rg5P6s'
     }
+};
+const FETCH_MOVIE = (idMovie) => {
+    fetch(`https://api.themoviedb.org/3/movie/${idMovie}?language=en-US`, OPTIONS)
+        .then(response => response.json())
+        .then(movie => {
+            console.log(movie)
+            const isLiked = favourite_movies.includes(movie.id); 
+            const likeButtonClass = isLiked ? 'userLiked' : '';
+            const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+            FAVORITE_CONTAINER.innerHTML += `<div class="wrapper">
+            <div class="card">
+                <div class="poster">
+                <img src="${posterUrl}" alt="Location Unknown">
+                </div>
+                <div class="details">
+                    <h1>${movie.original_title}</h1>
+                    <h2>${movie.release_date}</h2>
+                    <div class="tags">
+                        <span class="tag">${movie.popularity}</span>
+                    </div>
+                    <p class="desc">${movie.overview}</p>
+                </div>
+            </div>
+            <button class='likeBtn ${likeButtonClass}'> <i class="fa fa-thumbs-up" aria-hidden="true"></i>like</button>
+        </div>`;
+            
+            const USER_LIKED = document.querySelectorAll('.likeBtn');
+            USER_LIKED.forEach((btn, i) => {
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('userLiked');
+                    const movieId = movie.id;
+                    const movieIndex = favourite_movies.indexOf(movieId);
+                    if (movieIndex === -1) {
+                        favourite_movies.push(movieId);
+                    } else {
+                        const userConfirmed = confirm('Are you sure you want to remove the movie from your favorites?');
+                        if (userConfirmed) {
+                            favourite_movies.splice(movieIndex, 1);
+                            
+                            location.reload();
+                        } else {
+                            btn.classList.add('userLiked');
+                            return;
+                        }
+                    }
+                    localStorage.setItem('favourite', JSON.stringify(favourite_movies));
+                });
+            });
+        })
 
-    function updateLocalStorage() {
-    localStorage.setItem("likedMovies", JSON.stringify(likedMoviesArray));
-    }
+        .catch(err => console.error(err));
+}
 
-    function displayLikedMovies() {
-    likedMoviesList.innerHTML = "<h2>Liked Movies</h2>";
-    const movieCardContainer = document.createElement("div");
-    movieCardContainer.className = "movie-card-container";
-
-    likedMoviesArray.forEach((movieData) => {
-        const movieCard = createMovieCard(movieData);
-        movieCardContainer.appendChild(movieCard);
+if (favourite_movies.length > 0) {
+    console.log(true);
+    favourite_movies.forEach((movie) => {
+        FETCH_MOVIE(movie)
     });
-
-    likedMoviesList.appendChild(movieCardContainer);
-    }
-
-    displayLikedMovies();
-
-    resetButton.addEventListener("click", () => {
-    localStorage.removeItem("likedMovies");
-    likedMoviesArray = [];
-    updateLocalStorage();
-    displayLikedMovies();
-    });
-});
-
-window.addEventListener("beforeunload", () => {
-    localStorage.setItem("likedMovies", JSON.stringify(likedMoviesArray));
-});
+}
+else {
+    console.log(false);
+}
+localStorage.clear();
